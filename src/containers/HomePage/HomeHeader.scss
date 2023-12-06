@@ -1,3 +1,6 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
 .home-header-container {
     height: 60px;
     // border: 1px solid red;
@@ -59,21 +62,39 @@
             i {
                 font-size: 15px;
                 margin-right: 5px;
-                
+                text-transform: lowercase;
             }
         }
         
         .language-vi {
+            padding-right: 5px;
             cursor: pointer;
+            opacity: 0.2;
             &.active {
-                color: orange;
+                opacity: 1;
+                span {
+                    color: red;
+                }
+            }
+            &:hover {
+                opacity: 1;
+                color: red;
             }
         }
         
         .language-en {
+            padding-left: 5px;
             cursor: pointer;
+            opacity: 0.2;
             &.active {
-                color: orange;
+                opacity: 1;
+                span{
+                    color: blue;
+                }
+            }
+            &:hover {
+                opacity: 1;
+                color: blue;
             }
         }
 
