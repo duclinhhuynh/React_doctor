@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-class Specialty extends Component {
+class HandBook extends Component {
     
     render() {  
         let settings = {
@@ -24,23 +24,23 @@ class Specialty extends Component {
                     <div className='section-body'>
                     <Slider {...settings}>
                         <div className='img-customize'>
-                            <div className='img-child specialty'></div>                           
+                            <div className='img-child handbook'></div>                           
                             <div className='title-customize'>Chuyên khoa 1</div>
                         </div>
                         <div className='img-customize'>
-                            <div className='img-child specialty'></div>
+                            <div className='img-child handbook'></div>
                             <div className='title-customize'>Chuyên khoa 1</div>
                         </div>
                         <div className='img-customize'>
-                            <div className='img-child specialty'></div>
+                            <div className='img-child handbook'></div>
                             <div className='title-customize'>Chuyên khoa 1</div>
                         </div>
                         <div className='img-customize'>
-                            <div className='img-child specialty'></div>
+                            <div className='img-child handbook'></div>
                             <div className='title-customize'>Chuyên khoa 1</div>
                         </div>
                         <div className='img-customize'>
-                            <div className='img-child specialty'></div>
+                            <div className='img-child handbook'></div>
                             <div className='title-customize'>Chuyên khoa 1</div>
                         </div>
                     </Slider>    
@@ -65,4 +65,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Specialty);
+export default connect(mapStateToProps, mapDispatchToProps)(HandBook);

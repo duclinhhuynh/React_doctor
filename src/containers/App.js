@@ -12,14 +12,13 @@ import { path } from '../utils'
 
 import Home from '../routes/Home';
 import Login from './Auth/Login';
-import Header from './Header/Header';
 import System from '../routes/System';
-
 import { CustomToastCloseButton } from '../components/CustomToast';
 import ConfirmModal from '../components/ConfirmModal';
 import HomePage from'../containers/HomePage/HomePage'
 import CustomScrollbars from '../components/CustomScrollbars'
-class App extends Component {
+import Header from './Header/Header';
+class App extends Component {   
 
     handlePersistorState = () => {
         const { persistor } = this.props;
@@ -45,8 +44,6 @@ class App extends Component {
                 <Router history={history}>
                     <div className="main-container">
                         <ConfirmModal />
-                        {this.props.isLoggedIn && <Header />}
-
                         <span className="content-container">
                         <CustomScrollbars style={{height: '100vh', width: '100%'}}>    
                             <Switch>
