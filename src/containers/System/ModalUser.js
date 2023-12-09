@@ -22,14 +22,15 @@ class ModalUser extends Component {
 
             this.setState({
                   email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            address: '',
+                  password: '',
+                  firstName: '',
+                  lastName: '',
+                  address: '',
             })
         })
     }
     componentDidMount() {
+        console.log('dismount edit modal', this.props.currentUser);
     }
     handleOnChangeInput = (event, id) => {
         console.log(event.target.value.id);

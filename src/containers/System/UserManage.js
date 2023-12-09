@@ -3,10 +3,11 @@ import { FormattedMessage } from 'react-intl';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsers, createNewUserService, deleteUserService } from '../../services/userService';
+import { getAllUsers, createNewUserService, deleteUserService , editUserService} from '../../services/userService';
 import ModalUser from './ModalUser';
 import { reject } from 'lodash';
 import {emitter} from '../../utils/emitter'
+import ModalEditUser from './ModalEditUser';
 class UserManage extends Component {
 
     constructor(props){
@@ -14,6 +15,8 @@ class UserManage extends Component {
         this.state = {
             arrUsers: [],
             isOpenModalUser: false,
+            isOpenEditModalUser: false,
+            userEdit: {}
         };
     }
 
@@ -36,9 +39,31 @@ class UserManage extends Component {
             isOpenModalUser: true
         })
     }
+    handleEditUser =(user) => {
+        this.setState({
+            isOpenEditModalUser:true,
+            userEdit: user
+        })
+    }
+    doEditUser = async(user) => {
+        try {
+            let res = await editUserService(user);
+            if(res && res.errCode === 0){
+                this.setState({
+                    isOpenEditModalUser:false
+                })
+                await this.getAllUsersFromReact()
+            }else{
+                alert(res.errCode)
+            }
+        } catch (error) {
+            
+        }
+    }
     handleClose = () => {
         this.setState({
-            isOpenModalUser: false
+            isOpenModalUser: false,
+            isOpenEditModalUser:false,
         })
     }
     createNewUser = async(data) => {
@@ -80,9 +105,7 @@ class UserManage extends Component {
 
 
     render() {
-        console.log('check render', this.state);
         let arrUsers = this.state.arrUsers;
-        console.log(arrUsers);
         return (
             <div className="user-container">
                 <ModalUser 
@@ -90,6 +113,16 @@ class UserManage extends Component {
                 isclose = {this.handleClose}
                 createNewUser = {this.createNewUser}
                 />                
+                {
+                
+                this.state.isOpenEditModalUser &&
+                <ModalEditUser
+                isOpen = {this.state.isOpenEditModalUser}
+                isclose = {this.handleClose}
+                currentUser = {this.state.userEdit}
+                editUser = {this.doEditUser}
+                />
+                }
                 <div className='title text-center'> manage user with react</div>
                 <div className='mx-1 btn btn-primary px-3' 
                 onClick={() => this.handleAddNewUser()}><i className='fas fa-plus'></i>Add new users</div>
@@ -112,7 +145,7 @@ class UserManage extends Component {
                                             <td>{item.email}</td>
                                             <td>{item.address}</td>
                                             <tb>
-                                                <button className='btn-edit mt-2'><i className="fa-solid fa-pencil"></i></button>
+                                                <button className='btn-edit mt-2' onClick={()=> this.handleEditUser(item)}><i className="fa-solid fa-pencil"></i></button>
                                                 <button className='btn-delete mt-2' onClick={() => this.handleDeleteUser(item)}><i className="fa-solid fa-trash"></i></button>
                                             </tb>
                                     </tr>
