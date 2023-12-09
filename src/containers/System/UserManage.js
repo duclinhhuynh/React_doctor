@@ -3,8 +3,10 @@ import { FormattedMessage } from 'react-intl';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import { connect } from 'react-redux';
 import './UserManage.scss';
-import { getAllUsers, createNewUserService } from '../../services/userService';
+import { getAllUsers, createNewUserService, deleteUserService } from '../../services/userService';
 import ModalUser from './ModalUser';
+import { reject } from 'lodash';
+import {emitter} from '../../utils/emitter'
 class UserManage extends Component {
 
     constructor(props){
@@ -49,10 +51,24 @@ class UserManage extends Component {
                 this.setState({
                     isOpenModalUser: false
                 })
+                emitter.emit('EVENT_CLEAT_MODAL_DATA', {'id': 'your id'})
             }
             console.log('respone create  user', response);
         } catch (error) {
             
+        }
+    }
+
+    handleDeleteUser = async(user) =>{
+        try {
+            let res = await deleteUserService(user.id);
+            if(res && res.errCode === 0 ){
+                await this.getAllUsersFromReact();
+            }else{
+                alert(res.errMessage)
+            }
+        } catch (error) {
+            reject(error)           
         }
     }
     /**
@@ -77,7 +93,7 @@ class UserManage extends Component {
                 <div className='title text-center'> manage user with react</div>
                 <div className='mx-1 btn btn-primary px-3' 
                 onClick={() => this.handleAddNewUser()}><i className='fas fa-plus'></i>Add new users</div>
-                <div className='users-tablse mt-3 mx-1'>
+                <div className='users-tablse mt-3 mx-1 '>
                 <table id="customers">
                     <tr>
                         <th>Email</th>
@@ -85,12 +101,11 @@ class UserManage extends Component {
                         <th>Last Name</th>
                         <th>Address</th>
                         <th>Actions</th>
-                    </tr>
+                    </tr >
                         {
                             arrUsers && arrUsers.map((item, index) => {
-                                console.log('eric', item, index);
                                 return(
-                                    <tr>
+                                    <tr >
 
                                             <td>{item.firstName}</td>
                                             <td>{item.lastName}</td>
@@ -98,7 +113,7 @@ class UserManage extends Component {
                                             <td>{item.address}</td>
                                             <tb>
                                                 <button className='btn-edit mt-2'><i className="fa-solid fa-pencil"></i></button>
-                                                <button className='btn-delete mt-2'><i className="fa-solid fa-trash"></i></button>
+                                                <button className='btn-delete mt-2' onClick={() => this.handleDeleteUser(item)}><i className="fa-solid fa-trash"></i></button>
                                             </tb>
                                     </tr>
                                 )

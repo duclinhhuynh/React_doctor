@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { emitter } from '../../utils/emitter';
 import { useState } from 'react';
-class ModalUser extends Component {
+class ModalEditUser extends Component {
 
     constructor(props){
         super(props);
@@ -15,19 +15,6 @@ class ModalUser extends Component {
             lastName: '',
             address: '',
         }
-        this.listenToEmitter();
-    }
-    listenToEmitter(){
-        emitter.on('EVENT_CLEAT_MODAL_DATA',()=> {
-
-            this.setState({
-                  email: '',
-            password: '',
-            firstName: '',
-            lastName: '',
-            address: '',
-            })
-        })
     }
     componentDidMount() {
     }
@@ -130,5 +117,5 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalUser);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalEditUser);
 
