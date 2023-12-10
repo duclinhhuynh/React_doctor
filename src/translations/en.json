@@ -8,7 +8,9 @@
         "select-doctor": "choose a good doctor",
         "fee": "Fee",
         "check-health": "Genneral health check",
-        "support": "Support"
+        "support": "Support",
+        "welcome": "Welcome, "
+
     },
     "banner" :{
         "title1": "Medical background",
@@ -49,17 +51,18 @@
         "userpass-wrong": "Invalid username or password!"
     },
     "menu": {
-        "system": {
-            "header": "System",
-            "system-administrator": {
-                "header": "System Administrator",
-                "user-manage": "User manage",
-                "user-redux": "User redux",
-                "register-package-group-or-account": "Register service package for group/account"
-            },
-            "system-parameter": {
-                "header": "System-parameter"
-            }
+        "admin":{
+            "manage-user": "Manage user",
+            "manage-doctor": "Manage doctor",
+            "manage-admin": "Manage admin",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux",
+            "clinic": "Clinics",
+            "manage-clinic": "Manage clinic",
+            "specialty" : "Specialties",
+            "manage-specialty":"Manage-specialty",
+            "handbook":"Handbooks",
+            "manage-handbook": "Manage handbook"
         }
     },
     "system": {

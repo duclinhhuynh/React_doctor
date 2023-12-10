@@ -8,7 +8,8 @@
         "select-doctor": "Chọn bác sĩ giỏi",
         "fee": "Gói khám",
         "check-health": "Khám sức khỏe tổng quát",
-        "support": "Hỗ trợ"
+        "support": "Hỗ trợ",
+        "welcome": "Xin chào, "
     },
     "banner" :{
         "title1": "Nền tảng y tế",
@@ -48,17 +49,18 @@
         "userpass-wrong": "Sai tên đăng nhập hoặc mật khẩu!"
     },
     "menu": {
-        "system": {
-            "header": "Hệ thống",
-            "system-administrator": {
-                "header": "Quản trị hệ thống",
-                "user-manage": "Quản lý người sử dụng",
-                "user-redux": "Quản user redux",
-                "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
-            },
-            "system-parameter": {
-                "header": "Tham số hệ thống"
-            }
+        "admin":{
+            "manage-user": "Quản lý người dùng",
+            "manage-doctor": "Quản lý bác sĩ",
+            "manage-admin": "Quản lý admin",
+            "crud": "CRUD user",
+            "crud-redux": "CRUD redux",
+            "clinic": "Phòng khám",
+            "manage-clinic": "Quản lý phòng khám",
+            "specialty" : "Chuyên khoa",
+            "manage-specialty":"Quản lý chyên khoa",
+            "handbook":"Cẩm nang",
+            "manage-handbook": "Quản lí cẩm nang"
         }
     },
     "system": {

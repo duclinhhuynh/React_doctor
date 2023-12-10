@@ -4,12 +4,14 @@ import './HomeHeader.scss';
 import { FormattedMessage } from 'react-intl';
 import {LANGUAGES} from '../../utils/constant'
 import { changeLanguageApp } from '../../store/actions/appActions';
+import * as actions from "../../store/actions";
 class HomeHeader extends Component {
     changeLanguage = (language) => {
         this.props.changeLanguageAppRedux(language)
     }
     render() {
         let language = this.props.language;
+        console.log('check user info', this.props.userInfo);
         return (
             <React.Fragment>
                 <div className='home-header-container'>
@@ -99,6 +101,7 @@ class HomeHeader extends Component {
 const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo,
         language: state.app.language,
         // inject
     };
@@ -106,7 +109,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
+        changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language)),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo))
     };
 };
 

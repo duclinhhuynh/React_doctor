@@ -28,12 +28,14 @@ class System extends Component {
 const mapStateToProps = state => {
     return {
         systemMenuPath: state.app.systemMenuPath,
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        // userInfo: state.user.userInfo,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
+        
     };
 };
 

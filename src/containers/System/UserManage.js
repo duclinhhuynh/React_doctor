@@ -8,6 +8,7 @@ import ModalUser from './ModalUser';
 import { reject } from 'lodash';
 import {emitter} from '../../utils/emitter'
 import ModalEditUser from './ModalEditUser';
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 class UserManage extends Component {
 
     constructor(props){
@@ -163,6 +164,9 @@ class UserManage extends Component {
 
 const mapStateToProps = state => {
     return {
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo,
+        language: state.app.language,
     };
 };
 

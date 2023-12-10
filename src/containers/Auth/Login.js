@@ -10,6 +10,7 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: '',
             username: '',
             password: '',
             isShowPassword: false,
@@ -39,7 +40,7 @@ class Login extends Component {
             }
             if(data && data.errCode===0){
                 this.props.userLoginSuccess(data.user)
-                console.log('login suceeds');
+                console.log('login suceeds', data.user);
             }
         } catch (error) {
             if(error.response){
@@ -115,7 +116,8 @@ class Login extends Component {
 
 const mapStateToProps = state => {
     return {
-        language: state.app.language
+        language: state.app.language,
+        userInfo: state.app.userInfo,
     };
 };
 
