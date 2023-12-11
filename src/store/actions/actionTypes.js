@@ -15,6 +15,11 @@ const actionTypes = Object.freeze({
     USER_LOGIN_FAIL: 'USER_LOGIN_FAIL',
     PROCESS_LOGOUT: 'PROCESS_LOGOUT',
 
+
+    //admin
+    FETCH_GENDER_START: 'FETCH_GENDER_START',
+    FETCH_GENDER_SUCCESS: 'FETCH_GENDER_SUCCESS',
+    FETCH_GENDER_FAIL: 'FETCH_GENDER_FAIL',
 })
 
 export default actionTypes;
