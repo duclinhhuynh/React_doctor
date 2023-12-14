@@ -8,6 +8,7 @@ import './UserRedux.scss';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css';
 import { escape, escapeRegExp, every } from 'lodash';
+import TableManageUser from './TableManageUser';
 class UserRedux extends Component {
     constructor(props) {
         super(props);
@@ -17,6 +18,7 @@ class UserRedux extends Component {
             roleArr: [],
             previewImgURL: '',
             isOpen: false,
+            isUserCreated: false,
 
             email: '',
             password: '',
@@ -76,7 +78,21 @@ class UserRedux extends Component {
                 position: arrPositions && arrPositions.length > 0 ? arrPositions[0].key : ''
             })
         }
-    }
+        if(prevProps.listUsers !== this.props.listUsers){
+            this.setState({
+                email: '',
+                password: '',
+                firstName: '',
+                lastName: '',
+                phoneNumber: '',
+                address: '',
+                gender: '',
+                position: '',
+                role: '',
+                avatar: '',
+            })
+        }
+    }   
     handleOnchangeImage = (event) => {
         let data = event.target.files;
         let file = data[0];
@@ -98,6 +114,10 @@ class UserRedux extends Component {
         if(isValid === false){
             return;
         }
+        this.setState ({
+            ...this.state,
+            isUserCreated: false
+        })
         this.props.createNewUser({
                     email: this.state.email,
                     password: this.state.password,
@@ -109,7 +129,10 @@ class UserRedux extends Component {
                     roleId: this.state.role,
                     positionId: this.state.position
         })
-        console.log('before before submit check state', this.state);
+        alert('add success')
+        setTimeout(() => {
+            this.props.fetchUserRedux();
+        },1000)
     }
     checkValidateInput = () => {
         let isValid = true;
@@ -128,8 +151,6 @@ class UserRedux extends Component {
         copyState[id] = event.target.value;
         this.setState({
             ...copyState
-        }, ()=> {
-            console.log('check input onchange', this.state);
         })
         // email: '',
         // password: '',
@@ -152,8 +173,6 @@ class UserRedux extends Component {
 
         let { email, password,firstName,lastName , phoneNumber, address, gender, position,role, avatar
         } = this.state;
-        console.log("userRedux genders", genders);
-        console.log("check state from redux",this.state);
         return (
             <div>
                 <div className='user-redux'>
@@ -262,10 +281,13 @@ class UserRedux extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className='col-12'>
+                            <div className='col-12 my-3'>
                             <button className='btn btn-primary my-3'
                                 onClick={()=> this.handleSaveUser()}
                             ><FormattedMessage id="manage-user.save"/></button>
+                            </div>
+                            <div className='col-12'>
+                                <TableManageUser/>
                             </div>
                         </div>
                     </div>
@@ -291,6 +313,7 @@ const mapStateToProps = state => {
         roleRedux :state.admin.roles,
         positionRedux: state.admin.positions,
         isLoadingGender: state.admin.isLoadingGender,
+        listUsers: state.admin.users,
     };
 };
 
@@ -300,6 +323,7 @@ const mapDispatchToProps = dispatch => {
         getPositionStart: () => dispatch(actions.fetchPositionStart()),
         getRoleStart: () => dispatch(actions.fetchRoleStart()),
         createNewUser: (data) => dispatch(actions.createNewUser(data)),
+        fetchUserRedux: () => dispatch(actions.fetchAllUsersStart())
         // processLogout: () => dispatch(actions.processLogout()),
         // changeLanguageAppRedux: (language) => dispatch(actions.changeLanguageApp(language)),
     };

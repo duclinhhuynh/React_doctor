@@ -8,7 +8,6 @@ import ModalUser from './ModalUser';
 import { reject } from 'lodash';
 import {emitter} from '../../utils/emitter'
 import ModalEditUser from './ModalEditUser';
-import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript';
 class UserManage extends Component {
 
     constructor(props){
@@ -27,7 +26,7 @@ class UserManage extends Component {
 
     getAllUsersFromReact = async() => {
         let response = await getAllUsers('ALL');
-        console.log('get user from node.js', response);
+        // console.log('get user from node.js', response);
         if(response && response.errCode === 0){
             this.setState({
                 arrUsers: response.users
