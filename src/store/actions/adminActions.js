@@ -1,5 +1,5 @@
 import actionTypes from './actionTypes';
-import {getAllCodeService, createNewUserService, getAllUsers,deleteUserService} from '../../services/userService';
+import {getAllCodeService, createNewUserService, getAllUsers,deleteUserService, editUserService} from '../../services/userService';
 
 // export const fetchGenderStart = () => ({
 //     type: actionTypes.FETCH_GENDER_START
@@ -59,7 +59,7 @@ export const createNewUser = (data) => {
             let res = await createNewUserService(data);
             if(res && res.errCode === 0){
                 dispatch(saveUserSuccess(res.data));
-                dispatch(fetchAllUsersStart)
+                dispatch(fetchAllUsersStart())
             }else{
                 dispatch(saveUserFailed());             
             }
@@ -136,7 +136,7 @@ export const deleteUser = (userId) => {
         try {
             let res = await deleteUserService(userId);
             if(res && res.errCode === 0){
-                dispatch(deleteUserSuccess(res.data));
+                dispatch(deleteUserSuccess(res.data))
                 dispatch(fetchAllUsersStart())
             }else{
                 dispatch(deleteUserFailed());             
@@ -146,6 +146,8 @@ export const deleteUser = (userId) => {
         }
     }
 }
+
+
 // start doing end
 
 export const deleteUserSuccess = () => ({
@@ -156,3 +158,26 @@ export const deleteUserFailed = () => ({
     type: actionTypes.DELETE_USER_FAILED,
 })
 
+export const editUser = (data) => {
+    return async(dispatch, getState) => {
+        try {
+            let res = await editUserService(data);
+            if(res && res.errCode === 0){
+                dispatch(editUserSuccess())
+                dispatch(fetchAllUsersStart())
+            }else{
+                dispatch(editUserFailed());             
+            }
+        } catch (error) {
+            dispatch(editUserFailed()) ;
+        }
+    }
+}
+
+export const editUserSuccess = () => ({
+    type: actionTypes.EDIT_USER_SUCCESS,
+})
+
+export const editUserFailed = () => ({
+    type: actionTypes.EDIT_USER_FAILED,
+})
